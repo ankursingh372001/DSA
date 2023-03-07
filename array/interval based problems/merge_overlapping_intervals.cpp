@@ -11,8 +11,8 @@ vector<vector<int>> merge(vector<int> intervals[], int n) {
 
     for (int i = 1; i < n; ++i) {
 
-        if (ans.back()[1] < intervals[i][0]) ans.push_back(intervals[i]); 
-        else ans.back()[1] = min(ans.back()[1], intervals[i][1]);
+        if (ans.back()[1] < intervals[i][0] - 1) ans.push_back(intervals[i]); 
+        else ans.back()[1] = max(ans.back()[1], intervals[i][1]);
     }
  
     return ans;
