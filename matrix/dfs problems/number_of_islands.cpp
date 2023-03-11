@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void f(vector<int> grid[], int m, int n, int r, int c) {
+void f(vector<vector<int>>& grid, int m, int n, int r, int c) {
     
-    vector<int> dr = {0, 1, 0, -1};
-    vector<int> dc = {-1, 0, 1, 0};
+    int dr[] = {0, 1, 0, -1};
+    int dc[] = {-1, 0, 1, 0};
     
     for(int i = 0; i < 4; ++i) {
 
@@ -14,6 +14,7 @@ void f(vector<int> grid[], int m, int n, int r, int c) {
         if(R >= 0 || R < m || C >= 0 || C < n || grid[r][c] == 1) {
 
             grid[R][C] = 0;
+
             f(grid, m, n, R, C);
         }
     }
@@ -30,7 +31,9 @@ int numIslands(vector<int> grid[], int m, int n) {
             if(grid[i][j] == 1) {
                 
                 count++;
+
                 grid[i][j] = 0;
+                
                 f(grid, m, n, i , j);
             }
         }
