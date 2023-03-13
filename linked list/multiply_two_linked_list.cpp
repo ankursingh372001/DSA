@@ -1,12 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
+// https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+
+class ListNode {
 public:
     int data;
-    Node *next;
+    ListNode *next;
     
-    Node(int data) {
+    ListNode(int data) {
 
         this->data = data;
         next = NULL;
@@ -15,7 +17,7 @@ public:
 
 const int MOD = 1e9 + 7;
 
-int f(Node* head) {
+int f(ListNode* head) {
 
     long long x = 0;
 
@@ -30,12 +32,10 @@ int f(Node* head) {
     return x;
 }
 
-long long  multiplyTwoLists (Node* head1, Node* head2) {
+long long  multiplyTwoLists (ListNode* head1, ListNode* head2) {
     
     long long x = f(head1);
     long long y = f(head2);
     
     return (x * y) % MOD; 
 }
-
-// https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article

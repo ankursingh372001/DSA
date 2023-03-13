@@ -1,91 +1,77 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
+// https://leetcode.com/problems/reorder-list/description/
+
+class ListNode {
 public:
     int data;
-    Node *next;
+    ListNode *next;
     
-    Node(int data) {
+    ListNode(int data) {
 
         this->data = data;
         next = NULL;
     }
 };
 
-class Solution {
-public:
+ListNode* findMiddleNode(ListNode* head) {
     
-    Node* findMiddleNode(Node* head) {
+    if(head == NULL || head->next == NULL)
+        return head;
         
-        Node* slow = head;
-        Node* fast = head;
+    ListNode* slow = head;
+    ListNode* fast = head;
+    
+    while(fast && fast->next) {
         
-        while(fast && fast->next) {
-            
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        
-        return slow;
+        slow = slow->next;
+        fast = fast->next->next;
     }
     
-    Node* reverse(Node* head) {
-        
-        if(head == NULL || head->next == NULL)
-            return head;
-            
-        Node* prev = NULL;
-        Node* curr = head;
-        Node* next = head->next;
-        
-        while(curr) {
-            
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        
-        return prev;
-    }
-    
-    void reorderList(Node* head) {
-        
-        if(head == NULL || head->next == NULL || head->next->next == NULL)
-            return;
-        
-        Node* midd = findMiddleNode(head);
-        
-        Node* tail = head;
-        while(tail->next != midd)
-            tail = tail->next;
-        
-        tail->next = NULL;
-        
-        Node* curr1 = head;
-        Node* curr2 = reverse(midd);
-        
-        Node* ans = head;
-        curr1 = curr1->next;
-        
-        Node* curr = ans;
-        
-        while(curr1 && curr2) {
-            
-            curr->next = curr2;
-            curr = curr->next;
-            curr2 = curr2->next;
-            
-            curr->next = curr1;
-            curr = curr->next;
-            curr1 = curr1->next;
-        }
-        
-        curr->next = curr2;
-        
-        head = ans;
-    }
-};
+    return slow;
+}
 
-https://leetcode.com/problems/reorder-list/description/
+ListNode* reverse(ListNode* head) {
+    
+    if(head == NULL || head->next == NULL)
+        return head;
+
+    ListNode* prev = NULL;
+    ListNode* curr = head;
+    
+    while(curr) {
+        
+        ListNode* next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    
+    return prev;
+}
+
+void reorderList(ListNode* head) {
+    
+    if(head == NULL || head->next == NULL || head->next->next == NULL)
+        return;
+    
+    ListNode* midd = findMiddleNode(head);
+    
+    ListNode* curr1 = head;
+    ListNode* curr2 = reverse(midd->next);
+    
+    midd->next = NULL;
+    
+    while(curr2) {
+        
+        ListNode* temp1 = curr1->next;
+        ListNode* temp2 = curr2->next;
+        
+        curr1->next = curr2;
+        curr1->next->next = temp1;
+        
+        curr1 = temp1;
+        curr2 = temp2;
+    }
+}

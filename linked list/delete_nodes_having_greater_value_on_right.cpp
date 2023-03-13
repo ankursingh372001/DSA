@@ -1,21 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
+class ListNode {
 public:
     int data;
-    Node *next;
+    ListNode *next;
 
-    Node() {
+    ListNode(int data) {
+        this->data = data;
         next = NULL;
     }
 };
 
-Node* reverseList(Node* head) {
+ListNode* reverseList(ListNode* head) {
     
-    Node* prev = NULL;
-    Node* curr = head;
-    Node* next = NULL;
+    ListNode* prev = NULL;
+    ListNode* curr = head;
+    ListNode* next = NULL;
     
     while(curr) {
         
@@ -28,14 +29,14 @@ Node* reverseList(Node* head) {
     return prev;
 }
 
-Node *compute(Node *head) {
+ListNode *compute(ListNode *head) {
     
     if(head == NULL || head->next == NULL)
         return head;
         
     head = reverseList(head);
     
-    Node* curr = head;
+    ListNode* curr = head;
     
     while(curr->next) {
         

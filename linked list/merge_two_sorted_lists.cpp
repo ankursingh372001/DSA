@@ -1,39 +1,41 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
+// https://leetcode.com/problems/merge-two-sorted-lists/
+
+class ListNode {
 public:
     int data;
-    Node *next;
+    ListNode *next;
 
-    Node() {
+    ListNode() {
         next = NULL;
     }
 
-    Node(int data) {
+    ListNode(int data) {
         this->data = data;
     }
 };
 
-Node* mergeList(Node* head1, Node* head2) {
+ListNode* mergeList(ListNode* head1, ListNode* head2) {
 
-    Node* head = new Node(-1);
-    Node* curr = head;
+    ListNode* head = new ListNode(-1);
+    ListNode* curr = head;
 
     while(head1 && head2) {
 
         if(head1->data <= head2->data) {
 
             curr->next = head1;
-            curr = curr->next;
             head1 = head1->next;
         }
         else {
 
             curr->next = head2;
-            curr = curr->next;
             head2 = head2->next;
         }
+
+        curr = curr->next;
     }
 
     if(head1)
@@ -44,5 +46,3 @@ Node* mergeList(Node* head1, Node* head2) {
 
     return head->next;
 }
-
-// https://leetcode.com/problems/merge-two-sorted-lists/

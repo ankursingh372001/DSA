@@ -1,26 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
+// https://leetcode.com/problems/reverse-linked-list/
+
+class ListNode {
 public:
     int data;
-    Node *next;
+    ListNode *next;
 
-    Node(int data) {
+    ListNode(int data) {
         this->data = data;
         next = NULL;
     }
 };
 
-Node* reverseList(Node* head) {
+ListNode* reverseList(ListNode* head) {
         
-    Node* prev = NULL;
-    Node* curr = head;
-    Node* next = head->next;
+    if(head == NULL || head->next == NULL)
+        return head;
+
+    ListNode* prev = NULL;
+    ListNode* curr = head;
     
     while(curr) {
         
-        next = curr->next;
+        ListNode* next = curr->next;
         curr->next = prev;
         prev = curr;
         curr = next;
@@ -28,5 +32,3 @@ Node* reverseList(Node* head) {
     
     return prev;
 }
-
-// https://leetcode.com/problems/reverse-linked-list/

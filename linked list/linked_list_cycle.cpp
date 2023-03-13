@@ -1,20 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
+// https://leetcode.com/problems/linked-list-cycle/description/
+
+class ListNode {
 public:
     int data;
-    Node *next;
+    ListNode *next;
 
-    Node() {
+    ListNode() {
         next = NULL;
     }
 };
 
-bool checkCycle(Node *head) {
+bool checkCycle(ListNode *head) {
 
-    Node* slow = head;
-    Node* fast = head;
+    ListNode* slow = head;
+    ListNode* fast = head;
         
     while (fast && fast->next) {
         
@@ -27,6 +29,3 @@ bool checkCycle(Node *head) {
         
     return false;
 }
-
-
-// https://leetcode.com/problems/linked-list-cycle/description/
